@@ -91,6 +91,8 @@ for eg:
 nvcc -dlto -arch=native -std=c++17 -O3  -L../lib/ -lcupqc  -o v2_bench_refactoring v2_bench_refactoring.cu  -I../include/ -I../include/cupqc
 ```
 
+Make sure to adjust the `arch` as per your GPU's compute capability. Check it [here](https://developer.nvidia.com/cuda-gpus)
+
 > Note: if programs dont run then delete the binary and build again using any of the given above two commands
 
 ### Benchmarking
