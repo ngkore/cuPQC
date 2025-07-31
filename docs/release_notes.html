@@ -17,8 +17,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -28,19 +28,19 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=4c56b82b" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=d0aa047a" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/cupqc_override.css" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=7f41d439"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Software License Agreement" href="license.html" />
-    <link rel="prev" title="cuPQC Usage" href="introduction.html" />
+    <link rel="prev" title="cuPQC SDK Usage" href="introduction.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -242,6 +242,7 @@
         <div class="sidebar-primary-item">
 
 
+
 <nav class="bd-docs-nav bd-links"
      aria-label="Table of Contents">
   <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
@@ -252,7 +253,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements and Functionality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Quick Installation Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">cuPQC Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">cuPQC SDK Usage</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">Software License Agreement</a></li>
 </ul>
@@ -270,8 +271,6 @@
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
 
@@ -320,9 +319,11 @@
 <p>This section includes significant changes, new features, performance improvements, and various issues. Unless noted, listed issues
 should not impact functionality. When functionality is impacted, we offer a work-around to avoid the issue (if available).</p>
 <section id="id1">
-<h2>0.2.0<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<p>This release introduces cuPQC. We support the functionality from the ML-KEM and ML-DSA post-quantum cryptography algorithms in all of their
-latest security categories.</p>
+<h2>0.3.0<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>This release introduces the cuPQC Software Development Kit. The cuPQC SDK is now a single package download that contains libraries for cryptographic processes.
+The two libraries that are contained in the cuPQC SDK for the 0.3.0 release are: the cuPQC library, as well as a new library, cuHash.
+The cuHash library contains GPU accelerated SHA-2, SHA-3 and, SHAKE hashing algorithms.</p>
+<p>Additionally, some performance improvements have been made to cuPQC’s ML-KEM and ML-DSA algorithms.</p>
 <section id="known-issues">
 <h3>Known Issues<a class="headerlink" href="#known-issues" title="Link to this heading">#</a></h3>
 </section>
@@ -345,7 +346,7 @@ latest security categories.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">cuPQC Usage</p>
+        <p class="prev-next-title">cuPQC SDK Usage</p>
       </div>
     </a>
     <a class="right-next"
@@ -363,6 +364,8 @@ latest security categories.</p>
             </div>
             
             
+
+
               
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
@@ -376,7 +379,7 @@ latest security categories.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">0.2.0</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">0.3.0</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#known-issues">Known Issues</a></li>
 </ul>
 </li>
@@ -386,6 +389,7 @@ latest security categories.</p>
 </div></div>
               
             
+
           </div>
           <footer class="bd-footer-content">
             
@@ -396,8 +400,8 @@ latest security categories.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -461,9 +465,10 @@ latest security categories.</p>
 
 
 
+
   <p class="copyright">
     
-      Copyright © 2024-2024, NVIDIA Corporation &amp; Affiliates. All rights reserved.
+      Copyright © 2024-2025, NVIDIA Corporation &amp; Affiliates. All rights reserved.
       <br/>
     
   </p>

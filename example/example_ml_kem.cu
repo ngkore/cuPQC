@@ -207,32 +207,6 @@ void ml_kem_decaps(std::vector<uint8_t> &sharedsecrets, const std::vector<uint8_
  * Actor 3 decaps using key from 1 and ciphertext from 2.
  */
 
-// int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
-//     unsigned int batch = 10;
-// 
-//     /*
-//      * Generate Public and Secret Keys!
-//      */
-//     std::vector<uint8_t> public_keys(MLKEM512Key::public_key_size * batch);
-//     std::vector<uint8_t> secret_keys(MLKEM512Key::secret_key_size * batch);
-// 
-//     ml_kem_keygen(public_keys, secret_keys, batch);
-// 
-//     /*
-//      * Create shared secret and encapsulate it into ciphertext!
-//      */
-//     std::vector<uint8_t> ciphertexts(MLKEM512Encaps::ciphertext_size * batch);
-//     std::vector<uint8_t> sharedsecrets(MLKEM512Encaps::shared_secret_size * batch);
-//     ml_kem_encaps(ciphertexts, sharedsecrets, public_keys, batch);
-// 
-//     /*
-//      * Decapsulate ciphertext and store into shared secret!
-//      */
-//     ml_kem_decaps(sharedsecrets, ciphertexts, secret_keys, batch);
-// }
-
-//adi
-
 int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
     unsigned int batch = 10;
 
@@ -244,21 +218,6 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
 
     ml_kem_keygen(public_keys, secret_keys, batch);
 
-    // Print Public and Secret Keys
-    for (unsigned int i = 0; i < batch; ++i) {
-        printf("Public Key %d: ", i);
-        for (size_t j = 0; j < MLKEM512Key::public_key_size; ++j) {
-            printf("%02x", public_keys[i * MLKEM512Key::public_key_size + j]);
-        }
-        printf("\n");
-
-        printf("Secret Key %d: ", i);
-        for (size_t j = 0; j < MLKEM512Key::secret_key_size; ++j) {
-            printf("%02x", secret_keys[i * MLKEM512Key::secret_key_size + j]);
-        }
-        printf("\n");
-    }
-
     /*
      * Create shared secret and encapsulate it into ciphertext!
      */
@@ -266,33 +225,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
     std::vector<uint8_t> sharedsecrets(MLKEM512Encaps::shared_secret_size * batch);
     ml_kem_encaps(ciphertexts, sharedsecrets, public_keys, batch);
 
-    // Print Ciphertexts and Shared Secrets
-    for (unsigned int i = 0; i < batch; ++i) {
-        printf("Ciphertext %d: ", i);
-        for (size_t j = 0; j < MLKEM512Encaps::ciphertext_size; ++j) {
-            printf("%02x", ciphertexts[i * MLKEM512Encaps::ciphertext_size + j]);
-        }
-        printf("\n");
-
-        printf("Shared Secret (Encapsulated) %d: ", i);
-        for (size_t j = 0; j < MLKEM512Encaps::shared_secret_size; ++j) {
-            printf("%02x", sharedsecrets[i * MLKEM512Encaps::shared_secret_size + j]);
-        }
-        printf("\n");
-    }
-
     /*
      * Decapsulate ciphertext and store into shared secret!
      */
     ml_kem_decaps(sharedsecrets, ciphertexts, secret_keys, batch);
-
-    // Print Decapsulated Shared Secrets
-    for (unsigned int i = 0; i < batch; ++i) {
-        printf("Shared Secret (Decapsulated) %d: ", i);
-        for (size_t j = 0; j < MLKEM512Encaps::shared_secret_size; ++j) {
-            printf("%02x", sharedsecrets[i * MLKEM512Encaps::shared_secret_size + j]);
-        }
-        printf("\n");
-    }
 }
-

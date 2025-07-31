@@ -12,7 +12,7 @@ SRCS = $(wildcard *.cu)
 TARGETS=$(patsubst %.cu,%,$(SRCS))
 
 $(TARGETS): %: %.cu
-	$(NVCC) $(NVCC_FLAGS) -L../lib/ -lcupqc  -o $@ $<  -I$(COMMONDX_INCLUDE_DIR) -I$(CUPQC_INCLUDE_DIR) 
+	$(NVCC) $(NVCC_FLAGS) -L../lib/ -lcupqc -lcuhash  -o $@ $<  -I$(COMMONDX_INCLUDE_DIR) -I$(CUPQC_INCLUDE_DIR) 
 .PHONY: all clean
 
 all: $(TARGETS) 

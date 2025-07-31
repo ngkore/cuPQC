@@ -5,7 +5,7 @@
 #  * :: - alias to static library target
 #
 
-set(cupqc_VERSION "0.2.0")
+set(cupqc_VERSION "0.3.0")
 # build: 
 
 

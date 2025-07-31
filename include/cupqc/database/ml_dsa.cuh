@@ -78,10 +78,11 @@ namespace cupqc {
 
         template<algorithm Alg, unsigned SecCat, unsigned NT, bool internal_api=false>
         __device__ void sign(uint8_t* signature,
-                                    const uint8_t* message, const size_t message_length,
-                                    const uint8_t* secret_key,
-                                    const uint8_t* entropy,
-                                    uint8_t* workspace, uint8_t* smem_workspace);
+                             const uint8_t* message, const size_t message_length,
+                             const uint8_t* context, const uint8_t context_length,
+                             const uint8_t* secret_key,
+                             const uint8_t* entropy,
+                             uint8_t* workspace, uint8_t* smem_workspace);
 
         // Verify
 
@@ -117,9 +118,10 @@ namespace cupqc {
 
         template<algorithm Alg, unsigned SecCat, unsigned NT, bool internal_api=false>
         __device__ bool verify(const uint8_t* message, const size_t message_length,
-                                      const uint8_t* signature,
-                                      const uint8_t* public_key,
-                                      uint8_t* workspace, uint8_t* smem_workspace);
+                               const uint8_t* context, const uint8_t context_length,
+                               const uint8_t* signature,
+                               const uint8_t* public_key,
+                               uint8_t* workspace, uint8_t* smem_workspace);
 
     } // namespace database
 } // namespace cupqc

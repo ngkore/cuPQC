@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cuPQC Usage &#8212; cuPQC</title>
+    <title>cuPQC SDK Usage &#8212; cuPQC</title>
   
   
   
@@ -17,8 +17,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -28,19 +28,19 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=4c56b82b" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=d0aa047a" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/cupqc_override.css" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=7f41d439"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
@@ -242,6 +242,7 @@
         <div class="sidebar-primary-item">
 
 
+
 <nav class="bd-docs-nav bd-links"
      aria-label="Table of Contents">
   <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
@@ -252,7 +253,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements and Functionality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Quick Installation Guide</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">cuPQC Usage</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">cuPQC SDK Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">Software License Agreement</a></li>
 </ul>
@@ -270,8 +271,6 @@
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
 
@@ -298,7 +297,7 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">cuPQC Usage</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">cuPQC SDK Usage</span></li>
   </ul>
 </nav>
 </div>
@@ -315,19 +314,26 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="cupqc-usage">
-<span id="intro-label"></span><h1>cuPQC Usage<a class="headerlink" href="#cupqc-usage" title="Link to this heading">#</a></h1>
-<p>This document provides a comprehensive overview of cuPQC, the NVIDIA® CUDA® Post-Quantum Cryptography library. cuPQC is designed to leverage the parallel processing power of NVIDIA GPUs to offer high-performance, batched, and secure implementations of post-quantum cryptographic algorithms. Specifically, this library includes two of the NIST standardized Post-Quantum Cryptographic algorithms: ML-KEM and ML-DSA.</p>
-<section id="basic-usage-of-cupqc">
-<h2>Basic usage of cuPQC<a class="headerlink" href="#basic-usage-of-cupqc" title="Link to this heading">#</a></h2>
+  <section id="cupqc-sdk-usage">
+<span id="intro-label"></span><h1>cuPQC SDK Usage<a class="headerlink" href="#cupqc-sdk-usage" title="Link to this heading">#</a></h1>
+<p>This document provides a comprehensive overview of the cuPQC SDK, the NVIDIA® CUDA® Post-Quantum Cryptography Software Development Kit.
+The cuPQC SDK contains two libraries: cuPQC and cuHash.
+cuPQC is designed to leverage the parallel processing power of NVIDIA GPUs to offer high-performance, batched, and secure implementations of post-quantum cryptographic algorithms.
+Specifically, this library includes two of the NIST standardized Post-Quantum Cryptographic algorithms: ML-KEM and ML-DSA.
+cuHash is a library that provides a set of cryptographic hash functions that are optimized for NVIDIA GPUs. In detail, cuHash provides GPU implementations of SHA-2, SHA-3, and SHAKE.
+This document illustrates how to utilize each library within the SDK, starting with the cuPQC library, then the cuHash library.</p>
+<section id="basic-usage-of-the-cupqc-library">
+<h2>Basic usage of the cuPQC library<a class="headerlink" href="#basic-usage-of-the-cupqc-library" title="Link to this heading">#</a></h2>
 <p>A first step in using cuPQC is defining the PQC operation we wish to perform. We specify our operations by adding together cuPQC <a class="reference internal" href="api/operators.html#operators-label"><span class="std std-ref">operators</span></a> to form a <em>PQC descriptor</em>.
-A well defined cuPQC descriptor must include the <a class="reference internal" href="api/operators.html#algorithm-operator-label"><span class="std std-ref">algorithm</span></a>, <a class="reference internal" href="api/operators.html#securitycategory-operator-label"><span class="std std-ref">security category</span></a>, <a class="reference internal" href="api/operators.html#function-operator-label"><span class="std std-ref">cryptographic function</span></a>, and <a class="reference internal" href="api/operators.html#blockdim-operator-label"><span class="std std-ref">block dimension</span></a>.</p>
+A well-defined cuPQC descriptor must include the <a class="reference internal" href="api/operators.html#algorithm-operator-label"><span class="std std-ref">algorithm</span></a>, <a class="reference internal" href="api/operators.html#securitycategory-operator-label"><span class="std std-ref">security category</span></a>, <a class="reference internal" href="api/operators.html#function-operator-label"><span class="std std-ref">cryptographic function</span></a>, and <a class="reference internal" href="api/operators.html#blockdim-operator-label"><span class="std std-ref">block dimension</span></a>.</p>
 <p>As an example, we illustrate how to construct a cuPQC descriptor for ML-KEM-512’s key generation function.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//cuPQC header</span>
+
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cupqc.hpp&gt;</span>
 
 <span class="c1">//cuPQC descriptor</span>
-<span class="c1">// ML KEM 512 Key Generation with 128 threads</span>
+<span class="c1">//ML KEM 512 Key Generation with 128 threads</span>
+
 <span class="k">using</span><span class="w"> </span><span class="n">MLKEM512Key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">ML_KEM_512</span><span class="p">()</span>
 <span class="w">                           </span><span class="o">+</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">function</span><span class="o">::</span><span class="n">Keygen</span><span class="o">&gt;</span><span class="p">()</span>
 <span class="w">                           </span><span class="o">+</span><span class="w"> </span><span class="n">Block</span><span class="p">()</span>
@@ -337,8 +343,8 @@ A well defined cuPQC descriptor must include the <a class="reference internal" h
 <section id="executing-cupqc">
 <h3>Executing cuPQC<a class="headerlink" href="#executing-cupqc" title="Link to this heading">#</a></h3>
 <p>These cuPQC descriptor types are instantiated into objects inside user kernels. Forming this object has no computational cost, and should be utilized as a handle.
-The cuPQC descriptor object provides a compute method, <a class="reference internal" href="api/methods.html#_CPPv4N5cupqc3PQC7executeEz" title="cupqc::PQC::execute"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">execute(...)</span></code></a> this function performs the request PQC function.
-The arguments of this method are dependent on the the PQC function and the PQC algorithm, see the <a class="reference internal" href="api/methods.html#methods-label"><span class="std std-ref">methods API reference</span></a>.</p>
+The cuPQC descriptor object provides a compute method, <a class="reference internal" href="api/methods.html#_CPPv4N5cupqc3PQC7executeEz" title="cupqc::PQC::execute"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">execute(...)</span></code></a> – this method performs the requested PQC function.
+The arguments of this method are dependent on the PQC function and the PQC algorithm, see the <a class="reference internal" href="api/methods.html#methods-label"><span class="std std-ref">cupqcmethods API reference</span></a>.</p>
 <p>To demonstrate cuPQC execution we will continue with our previous example and write a kernel for a batched key generation operation –
 each thread block will compute one public and secret key:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//cuPQC header</span>
@@ -365,14 +371,14 @@ each thread block will compute one public and secret key:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>In <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">keygen_kernel</span></code> each block computes a single <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">public_key</span></code> and <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">secret_key</span></code>. Many cuPQC algorithms requires an additional
-global memory workspace to be constructed, as well as a pre-filled buffer of cryptographic entropy. Techniques to allocate these variables is shown
+<p>In <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">keygen_kernel</span></code>, each block computes a single <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">public_key</span></code> and <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">secret_key</span></code>. Many cuPQC algorithms require an additional
+global memory workspace to be constructed, as well as a pre-filled buffer of cryptographic entropy. Techniques to allocate these variables are shown
 in the next section.</p>
 </section>
 <section id="launching-a-cupqc-kernel">
 <h3>Launching a cuPQC kernel<a class="headerlink" href="#launching-a-cupqc-kernel" title="Link to this heading">#</a></h3>
 <p>To launch a kernel with the cuPQC API inside, we need to know the block size and the required amount of global memory
-workspace. These are fixed by the cuPQC discriptor that we constructed earlier. In the host code we have <a class="reference internal" href="api/functions.html#functions-label"><span class="std std-ref">API function</span></a> calls that are
+workspace. These are fixed by the cuPQC descriptor that we constructed earlier. In the host code we have <a class="reference internal" href="api/functions.html#functions-label"><span class="std std-ref">API function</span></a> calls that are
 templated from the cuPQC descriptor, these API calls give the global memory workspace, as well as the entropy variables.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">ml_kem_keygen</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">public_keys</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">secret_keys</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">batch</span><span class="p">)</span>
 <span class="p">{</span>
@@ -391,8 +397,8 @@ templated from the cuPQC descriptor, these API calls give the global memory work
 <span class="w">    </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">d_public_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">d_secret_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="n">d_public_key</span><span class="p">,</span><span class="w"> </span><span class="n">length_public_key</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">batch</span><span class="p">);</span><span class="w"> </span><span class="c1">//These are uint8_t so length and batch are in bytes</span>
-<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="n">d_secret_key</span><span class="p">,</span><span class="w"> </span><span class="n">length_secret_key</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">batch</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_public_key</span><span class="p">,</span><span class="w"> </span><span class="n">length_public_key</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">batch</span><span class="p">);</span><span class="w"> </span><span class="c1">//These are uint8_t so length and batch are in bytes</span>
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_secret_key</span><span class="p">,</span><span class="w"> </span><span class="n">length_secret_key</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">batch</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">keygen_kernel</span><span class="o">&lt;&lt;&lt;</span><span class="n">batch</span><span class="p">,</span><span class="w"> </span><span class="n">MLKEM512Key</span><span class="o">::</span><span class="n">BlockDim</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">d_public_key</span><span class="p">,</span><span class="w"> </span><span class="n">d_secret_key</span><span class="p">,</span><span class="w"> </span><span class="n">workspace</span><span class="p">,</span><span class="w"> </span><span class="n">randombytes</span><span class="p">);</span>
 
@@ -403,7 +409,7 @@ templated from the cuPQC descriptor, these API calls give the global memory work
 <span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">secret_keys</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">d_secret_key</span><span class="p">,</span><span class="w"> </span><span class="n">length_secret_key</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">batch</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyDeviceToHost</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/*</span>
-<span class="cm">     * Delete device memory associated with the cryptograpic process.</span>
+<span class="cm">     * Delete device memory associated with the cryptographic process.</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_public_key</span><span class="p">);</span>
 <span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_secret_key</span><span class="p">);</span>
@@ -415,14 +421,101 @@ templated from the cuPQC descriptor, these API calls give the global memory work
 </section>
 <section id="compilation">
 <h3>Compilation<a class="headerlink" href="#compilation" title="Link to this heading">#</a></h3>
-<p>In order to compile a program which includes <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">cupqc</span><span class="p">.</span><span class="n">hpp</span></code>, as well the cuPQC API, users need to pass the location of the
+<p>In order to compile a program which includes <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">cupqc</span><span class="p">.</span><span class="n">hpp</span></code>, as well as the cuPQC API, users need to pass the location of the
 cuPQC header, as well as link with the static library provided. Details on how to use cuPQC in your project can be found in
-<a class="reference internal" href="installation.html#installation-guide-label"><span class="std std-ref">Quick Installation Guide</span></a>. The cuPQC API utilizes NVIDIA’s link-time-optimization (LTO),
-so we need to use the appropriate flags when compiling.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nvcc<span class="w"> </span>-std<span class="o">=</span>c++17<span class="w"> </span>-dlto<span class="w"> </span>-arch<span class="o">=</span>sm_80<span class="w"> </span>-L&lt;path_to_static_lib&gt;<span class="w"> </span>-lcupqc<span class="w"> </span>-I&lt;path_to_cupqc_include&gt;<span class="w"> </span>-I&lt;path_to_commondx&gt;<span class="w"> </span>-o<span class="w"> </span>intro_example
+<a class="reference internal" href="installation.html#installation-guide-label"><span class="std std-ref">Quick Installation Guide</span></a>. The cuPQC library is built using link-time-optimization (LTO),
+so the appropriate flags are required when compiling to your specific architecture.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nvcc<span class="w"> </span>-std<span class="o">=</span>c++17<span class="w"> </span>-dlto<span class="w"> </span>-arch<span class="o">=</span>sm_80<span class="w"> </span>-L&lt;path_to_static_lib&gt;<span class="w"> </span>-lcupqc<span class="w"> </span>-I&lt;path_to_cupqc_sdk_include&gt;<span class="w"> </span>-I&lt;path_to_commondx&gt;<span class="w"> </span>&lt;cupqc_intro_example.cu&gt;<span class="w"> </span>-o<span class="w"> </span>cupqc_intro_example
 </pre></div>
 </div>
 <p>For more information on the currently supported functionality see <a class="reference internal" href="requirements.html#requirements-and-functionalities-label"><span class="std std-ref">Requirements and Functionality</span></a>.</p>
+</section>
+</section>
+<section id="basic-usage-of-the-cuhash-library">
+<h2>Basic usage of the cuHash library<a class="headerlink" href="#basic-usage-of-the-cuhash-library" title="Link to this heading">#</a></h2>
+<p>A first step in using cuHash is defining the hash operation we wish to perform. We specify our operations by adding together cuHash <a class="reference internal" href="api/operators.html#operators-label"><span class="std std-ref">operators</span></a> to form a <em>Hash descriptor</em>.
+A well-defined cuHash descriptor must include the <a class="reference internal" href="api/operators.html#algorithm-operator-label"><span class="std std-ref">algorithm</span></a>, <a class="reference internal" href="api/operators.html#securitycategory-operator-label"><span class="std std-ref">security category</span></a>, and either <span class="xref std std-ref">thread</span>
+or <span class="xref std std-ref">warp</span>.</p>
+<p>As an example we show how to construct a SHA-3 256 hashing object using the warp configuration, that is we construct a SHA-3 hash utililizng a full warp.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//cuHash header</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cuhash.hpp&gt;</span>
+
+<span class="c1">//We use the cuPQC SDK namespace.</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">cupqc</span><span class="p">;</span>
+
+<span class="c1">//cuHash descriptor</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">SHA3_256_WARP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">SHA3_256</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Warp</span><span class="p">());</span>
+</pre></div>
+</div>
+<section id="executing-cuhash">
+<h3>Executing cuHash<a class="headerlink" href="#executing-cuhash" title="Link to this heading">#</a></h3>
+<p>These cuHash descriptor types are instantiated into objects inside user kernels.
+The cuHash descriptor object provides a few relevant methods, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">reset()</span></code>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">update(...)</span></code>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">finalize()</span></code>, and <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">digest(...)</span></code>.
+The <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">reset()</span></code> method resets the hash object to its initial state. The <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">update(...)</span></code> method takes a pointer to a buffer of data and its length, and hashes the data.
+The <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">finalize()</span></code> method finalizes the hash object and outputs the hash of the data into a buffer.
+The <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">digest(...)</span></code> method takes a pointer to a buffer of data and its length, and outputs the hash of the data into the buffer.
+For more information on these methods, see the <a class="reference internal" href="api/methods.html#cuhashmethods-label"><span class="std std-ref">methods API reference</span></a>.</p>
+<p>To demonstrate cuHash execution, we will continue with our previous example and write a kernel for a batched single hashed operation –
+each thread block will compute hash utilizing a warp:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//cuHash header</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cuhash.hpp&gt;</span>
+
+<span class="c1">//We use the cuPQC SDK namespace.</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">cupqc</span><span class="p">;</span>
+
+<span class="c1">//cuHash descriptor</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">SHA3_256_WARP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">SHA3_256</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Warp</span><span class="p">());</span>
+
+<span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">hash_sha3_kernel</span><span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">digest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">inbuf_len</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">SHA3_256_WARP</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">    </span><span class="n">hash</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+<span class="w">    </span><span class="n">hash</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">inbuf_len</span><span class="p">);</span>
+<span class="w">    </span><span class="n">hash</span><span class="p">.</span><span class="n">finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">hash</span><span class="p">.</span><span class="n">digest</span><span class="p">(</span><span class="n">digest</span><span class="p">,</span><span class="w"> </span><span class="n">SHA3_256_WARP</span><span class="o">::</span><span class="n">digest_size</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="launching-a-cuhash-kernel">
+<h3>Launching a cuHash kernel<a class="headerlink" href="#launching-a-cuhash-kernel" title="Link to this heading">#</a></h3>
+<p>Launching a kernel with the cuHash API is straightforward. This function takes a message buffer and outputs a digest buffer, where the hashing is performed on each thread block.
+In this case, it makes the most sense to use blocks with 32 threads, as this is the size of a warp.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">hash_sha3</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">digest</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">d_msg</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">d_digest</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">**&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_msg</span><span class="p">),</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">**&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_digest</span><span class="p">),</span><span class="w"> </span><span class="n">digest</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_msg</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">hash_sha3_kernel</span><span class="o">&lt;&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">d_digest</span><span class="p">,</span><span class="w"> </span><span class="n">d_msg</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">digest</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">d_digest</span><span class="p">,</span><span class="w"> </span><span class="n">digest</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="n">cudaMemcpyDeviceToHost</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_msg</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_digest</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>Compilation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>In order to compile a program which includes <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">cuhash</span><span class="p">.</span><span class="n">hpp</span></code>, as well the cuHash API, users need to pass the location of the
+cuPQC SDK headers, as well as link with the static library provided. Details on how to use cuHash in your project can be found in
+<a class="reference internal" href="installation.html#installation-guide-label"><span class="std std-ref">Quick Installation Guide</span></a>. The cuHash library is built with link-time-optimization (LTO),
+so we need to use the appropriate flags when compiling.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nvcc<span class="w"> </span>-std<span class="o">=</span>c++17<span class="w"> </span>-dlto<span class="w"> </span>-arch<span class="o">=</span>sm_80<span class="w"> </span>-L&lt;path_to_static_lib&gt;<span class="w"> </span>-lcuhash<span class="w"> </span>-I&lt;path_to_cupqc_sdk_include&gt;<span class="w"> </span>-I&lt;path_to_commondx&gt;<span class="w"> </span>&lt;cuhash_intro_example.cu&gt;<span class="w"> </span>-o<span class="w"> </span>cuhash_intro_example
+</pre></div>
+</div>
+<p>For more information on the currently supported functionality, see <a class="reference internal" href="requirements.html#requirements-and-functionalities-label"><span class="std std-ref">Requirements and Functionality</span></a>.</p>
 </section>
 </section>
 </section>
@@ -461,6 +554,8 @@ so we need to use the appropriate flags when compiling.</p>
             </div>
             
             
+
+
               
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
@@ -474,10 +569,16 @@ so we need to use the appropriate flags when compiling.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage-of-cupqc">Basic usage of cuPQC</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage-of-the-cupqc-library">Basic usage of the cuPQC library</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#executing-cupqc">Executing cuPQC</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-a-cupqc-kernel">Launching a cuPQC kernel</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compilation">Compilation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage-of-the-cuhash-library">Basic usage of the cuHash library</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#executing-cuhash">Executing cuHash</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-a-cuhash-kernel">Launching a cuHash kernel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Compilation</a></li>
 </ul>
 </li>
 </ul>
@@ -486,6 +587,7 @@ so we need to use the appropriate flags when compiling.</p>
 </div></div>
               
             
+
           </div>
           <footer class="bd-footer-content">
             
@@ -496,8 +598,8 @@ so we need to use the appropriate flags when compiling.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -561,9 +663,10 @@ so we need to use the appropriate flags when compiling.</p>
 
 
 
+
   <p class="copyright">
     
-      Copyright © 2024-2024, NVIDIA Corporation &amp; Affiliates. All rights reserved.
+      Copyright © 2024-2025, NVIDIA Corporation &amp; Affiliates. All rights reserved.
       <br/>
     
   </p>

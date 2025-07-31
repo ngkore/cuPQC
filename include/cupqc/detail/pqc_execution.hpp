@@ -12,6 +12,7 @@
 #include "pqc_description.hpp"
 #include "database.hpp"
 #include <cstdint>
+#include <variant>
 
 namespace cupqc {
     namespace detail {
@@ -56,6 +57,9 @@ namespace cupqc {
             static constexpr auto this_pqc_batches_per_block_v = this_pqc_batches_per_block::value;
 
             /// ---- Constraints
+            static_assert(is_kem_algorithm(this_type::this_pqc_algorithm_v) || is_dss_algorithm(this_type::this_pqc_algorithm_v), 
+                "Block execution is not supported for hashing.");
+
             static_assert(this_pqc_block_dim::y == 1 && this_pqc_block_dim::z == 1,
                           "Provided block dimension is invalid, y and z dimensions must both be 1.");
             static constexpr bool valid_block_dim = this_pqc_block_dim::flat_size >= 32 && this_pqc_block_dim::flat_size <= 1024;
@@ -113,7 +117,16 @@ namespace cupqc {
             inline __device__ auto execute(uint8_t* signature, const uint8_t* message, const size_t message_length, const uint8_t* secret_key,
                                            uint8_t* entropy, uint8_t* workspace, uint8_t* smem_workspace)
                     -> function_enable_if_t<this_t, function::Sign> {
-                database::sign<this_type::this_pqc_algorithm_v, this_type::this_pqc_security_category_v, this_type::this_pqc_block_dim_v.x>(signature, message, message_length, secret_key, entropy, workspace, smem_workspace);
+
+                constexpr uint8_t* context = nullptr;
+                constexpr uint8_t context_length = 0;
+                this->execute(signature, message, message_length, context, context_length, secret_key, entropy, workspace, smem_workspace);
+            }
+            template<class this_t = this_type>
+            inline __device__ auto execute(uint8_t* signature, const uint8_t* message, const size_t message_length, const uint8_t* context, const uint8_t context_length, const uint8_t* secret_key,
+                                           uint8_t* entropy, uint8_t* workspace, uint8_t* smem_workspace)
+                    -> function_enable_if_t<this_t, function::Sign> {
+                database::sign<this_type::this_pqc_algorithm_v, this_type::this_pqc_security_category_v, this_type::this_pqc_block_dim_v.x>(signature, message, message_length, context, context_length, secret_key, entropy, workspace, smem_workspace);
             }
 
             // verify
@@ -122,23 +135,167 @@ namespace cupqc {
             inline __device__ auto execute(const uint8_t* message, const size_t message_length, const uint8_t* signature, const uint8_t* public_key,
                                            uint8_t* workspace, uint8_t* smem_workspace)
                     -> function_enable_if_t<this_t, function::Verify, bool> {
-                return database::verify<this_type::this_pqc_algorithm_v, this_type::this_pqc_security_category_v, this_type::this_pqc_block_dim_v.x>(message, message_length, signature, public_key, workspace, smem_workspace);
+                constexpr uint8_t* context = nullptr;
+                constexpr uint8_t context_length = 0;
+                return this->execute(message, message_length, context, context_length, signature, public_key, workspace, smem_workspace);
+            }
+            template<class this_t = this_type>
+            inline __device__ auto execute(const uint8_t* message, const size_t message_length, const uint8_t* context, const uint8_t context_length, const uint8_t* signature, const uint8_t* public_key,
+                                           uint8_t* workspace, uint8_t* smem_workspace)
+                    -> function_enable_if_t<this_t, function::Verify, bool> {
+                return database::verify<this_type::this_pqc_algorithm_v, this_type::this_pqc_security_category_v, this_type::this_pqc_block_dim_v.x>(message, message_length, context, context_length, signature, public_key, workspace, smem_workspace);
             }
         };
 
+
+        template <typename Exec, algorithm Alg, typename T = void>
+        struct pqc_hash_context_helper;
+        
+        template <typename Exec, typename T>
+        struct pqc_hash_context_helper<Exec, algorithm::SHA3, T>
+        {
+            using type = typename database::KeccakContext<Exec, T::capacity>;
+        };
+        template <typename Exec, typename T>
+        struct pqc_hash_context_helper<Exec, algorithm::SHAKE, T>
+        {
+            using type = typename database::KeccakContext<Exec, T::capacity>;
+        };
+        template <typename Exec, typename T>
+        struct pqc_hash_context_helper<Exec, algorithm::SHA2_32, T>
+        {
+            using type = typename database::SHA2Context<Exec, uint32_t, T::digest>;
+        };
+        template <typename Exec, typename T>
+        struct pqc_hash_context_helper<Exec, algorithm::SHA2_64, T>
+        {
+            using type = typename database::SHA2Context<Exec, uint64_t, T::digest>;
+        };
+
+
+        template<class... Operators>
+        class pqc_thread_execution: public pqc_execution<Operators...>
+        {
+
+            using this_type = pqc_thread_execution<Operators...>;
+            using base_type = pqc_execution<Operators...>;
+
+            /// ---- Traits
+
+            template<class this_t, function func, class T = void>
+            using function_enable_if_t = COMMONDX_STL_NAMESPACE::enable_if_t<this_t::is_complete && this_t::this_pqc_function_v == func, T>;
+
+            using context_t = typename pqc_hash_context_helper<cupqc::Thread, this_type::this_pqc_algorithm_v, this_type>::type;
+            
+            [[no_unique_address]]
+            context_t context;
+
+            /// ---- Constraints
+            static_assert(is_hash_algorithm(this_type::this_pqc_algorithm_v), 
+                "Thread execution is only supported for hashing.");
+
+            /// ---- Accessors
+        public:
+
+            /// ---- Execution
+        public:
+
+            // hash
+            // N.B., have to use a template to use SFINAE
+            template<class this_t = this_type>
+            inline __device__ auto reset(void)
+                -> function_enable_if_t<this_t, function::Hash> {
+                    context.reset();
+            }
+            template<class this_t = this_type>
+            inline __device__ auto update(const uint8_t* buffer, size_t len)
+                -> function_enable_if_t<this_t, function::Hash> {
+                    context.update(buffer, len);
+            }
+            template<class this_t = this_type>
+            inline __device__ auto finalize(void)
+                -> function_enable_if_t<this_t, function::Hash> {
+                    if constexpr (this_type::this_pqc_algorithm_v == algorithm::SHA2_32 || this_type::this_pqc_algorithm_v == algorithm::SHA2_64) {
+                        context.finalize();
+                    } else {
+                        context.finalize(this_type::pad);
+                    }                    
+            }
+            template<class this_t = this_type>
+            inline __device__ auto digest(uint8_t* buffer, size_t len)
+                -> function_enable_if_t<this_t, function::Hash> {
+                    context.digest(buffer, len);
+            }
+
+        };
+
+        template<class... Operators>
+        class pqc_warp_execution: public pqc_execution<Operators...>
+        {
+
+            using this_type = pqc_warp_execution<Operators...>;
+            using base_type = pqc_execution<Operators...>;
+
+            /// ---- Traits
+            template<class this_t, function func, class T = void>
+            using function_enable_if_t = COMMONDX_STL_NAMESPACE::enable_if_t<this_t::is_complete && this_t::this_pqc_function_v == func, T>;
+
+            using context_t = typename pqc_hash_context_helper<cupqc::Warp, this_type::this_pqc_algorithm_v, this_type>::type;
+
+            [[no_unique_address]]
+            context_t context;
+
+            /// ---- Constraints
+            static_assert(is_hash_algorithm(this_type::this_pqc_algorithm_v), 
+                "Warp execution is only supported for hashing.");
+
+            /// ---- Accessors
+        public:
+
+            /// ---- Execution
+        public:
+
+            // hash
+            // N.B., have to use a template to use SFINAE
+            template<class this_t = this_type>
+            inline __device__ auto reset(void)
+                -> function_enable_if_t<this_t, function::Hash> {
+                    context.reset();
+            }
+            template<class this_t = this_type>
+            inline __device__ auto update(const uint8_t* buffer, size_t len)
+                -> function_enable_if_t<this_t, function::Hash> {
+                    context.update(buffer, len);
+            }
+            template<class this_t = this_type>
+            inline __device__ auto finalize(void)
+                -> function_enable_if_t<this_t, function::Hash> {
+                    context.finalize(this_type::pad);
+            }
+            template<class this_t = this_type>
+            inline __device__ auto digest(uint8_t* buffer, size_t len)
+                -> function_enable_if_t<this_t, function::Hash> {
+                    context.digest(buffer, len);
+            }
+
+        };
 
         template<class... Operators>
         struct make_description {
         private:
             static constexpr bool has_block_operator     = has_operator<operator_type::block, pqc_operator_wrapper<Operators...>>::value;
-            static constexpr bool has_execution_operator = has_block_operator;
+            static constexpr bool has_thread_operator    = has_operator<operator_type::thread, pqc_operator_wrapper<Operators...>>::value;
+            static constexpr bool has_warp_operator    = has_operator<operator_type::warp, pqc_operator_wrapper<Operators...>>::value;
+            static constexpr bool has_execution_operator = has_block_operator || has_thread_operator || has_warp_operator;
 
             // TODO cuBLASDx conditionally instantiates this, check if cuPQCDx also needs conditional instantiation
-            using execution_type = pqc_block_execution<Operators...>;
+            using execution_type = COMMONDX_STL_NAMESPACE::conditional_t<has_block_operator, pqc_block_execution<Operators...>, 
+                                    COMMONDX_STL_NAMESPACE::conditional_t<has_thread_operator, pqc_thread_execution<Operators...>, 
+                                     pqc_warp_execution<Operators...>>>;
             using description_type = pqc_full_description<Operators...>;
 
         public:
-            using type = typename COMMONDX_STL_NAMESPACE::conditional<has_execution_operator, execution_type, description_type>::type;
+            using type = COMMONDX_STL_NAMESPACE::conditional_t<has_execution_operator, execution_type, description_type>;
         };
 
         template<class... Operators>
