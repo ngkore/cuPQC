@@ -20,7 +20,12 @@ namespace cupqc {
         // KEM
         ML_KEM,
         // DSS
-        ML_DSA
+        ML_DSA,
+        // hashing
+        SHA3,
+        SHAKE,
+        SHA2_32,
+        SHA2_64,
     };
 
     template<algorithm Value>
@@ -32,6 +37,9 @@ namespace cupqc {
     }
     constexpr bool is_dss_algorithm(algorithm alg) {
         return alg == algorithm::ML_DSA;
+    }
+    constexpr bool is_hash_algorithm(algorithm alg) {
+        return alg == algorithm::SHA3 || alg == algorithm::SHAKE || alg == algorithm::SHA2_32 || alg == algorithm::SHA2_64;
     }
 
 } // namespace cupqc

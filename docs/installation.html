@@ -17,8 +17,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -28,19 +28,19 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=4c56b82b" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=d0aa047a" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/cupqc_override.css" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=7f41d439"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
@@ -51,7 +51,7 @@
     <link rel="icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="cuPQC Usage" href="introduction.html" />
+    <link rel="next" title="cuPQC SDK Usage" href="introduction.html" />
     <link rel="prev" title="Requirements and Functionality" href="requirements.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -242,6 +242,7 @@
         <div class="sidebar-primary-item">
 
 
+
 <nav class="bd-docs-nav bd-links"
      aria-label="Table of Contents">
   <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
@@ -252,7 +253,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements and Functionality</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Quick Installation Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">cuPQC Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">cuPQC SDK Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">Software License Agreement</a></li>
 </ul>
@@ -270,8 +271,6 @@
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
 
@@ -317,32 +316,37 @@
                   
   <section id="quick-installation-guide">
 <span id="installation-guide-label"></span><h1>Quick Installation Guide<a class="headerlink" href="#quick-installation-guide" title="Link to this heading">#</a></h1>
-<p>The cuPQC library is distributed on the <a class="reference external" href="https://developer.nvidia.com/cuqpc-downloads">https://developer.nvidia.com/cuqpc-downloads</a> website.</p>
-<section id="cupqc-in-your-project">
-<h2>cuPQC In Your Project<a class="headerlink" href="#cupqc-in-your-project" title="Link to this heading">#</a></h2>
-<p>cuPQC is a header + static archival library built with Link-Time-Optimization targets (LTO). Users will
-need to include the directory with <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">cupqc</span><span class="p">.</span><span class="n">hpp</span></code> and commonDx into their compilation commands, as well as the <code class="code highlight cpp docutils literal highlight-cpp"><span class="o">-</span><span class="n">dlto</span></code>
-flags with <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">nvcc</span></code> (NVCC 12.4 or newer).</p>
+<p>The cuPQC Software Development Kit is available at <a class="reference external" href="https://developer.nvidia.com/cuqpc-downloads">https://developer.nvidia.com/cuqpc-downloads</a>.</p>
+<section id="using-the-cupqc-sdk-in-your-project">
+<h2>Using the cuPQC SDK In Your Project<a class="headerlink" href="#using-the-cupqc-sdk-in-your-project" title="Link to this heading">#</a></h2>
+<p>The cuPQC SDK is a collection of static archival libraries built with Link-Time-Optimization targets (LTO). Users will
+need to include the directory with the relevant library header, e.g. <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">cupqc</span><span class="p">.</span><span class="n">hpp</span></code>, and commonDx in their compilation commands, as well as use
+<code class="code highlight cpp docutils literal highlight-cpp"><span class="o">-</span><span class="n">dlto</span></code>, or the other LTO flags with <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">nvcc</span></code> (NVCC 12.4 or newer).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nvcc<span class="w"> </span>-std<span class="o">=</span>c++17<span class="w"> </span>-dlto<span class="w"> </span>-arch<span class="o">=</span>sm_XY<span class="w">  </span>-L&lt;path_to_libcupqc&gt;<span class="w"> </span>-lcupqc<span class="w"> </span>-I&lt;path_to_cupqc_header&gt;<span class="w"> </span>-I&lt;path_to_commondx_include&gt;
 </pre></div>
 </div>
-<p>When you unpack the cuPQC package tarball into <code class="code highlight cpp docutils literal highlight-cpp"><span class="o">&lt;</span><span class="n">your_directory</span><span class="o">&gt;</span></code> the file <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">cupqc</span><span class="p">.</span><span class="n">hpp</span></code> will be available in this location:</p>
+<dl class="simple">
+<dt>When you unpack the cuPQC package tarball into <code class="code highlight cpp docutils literal highlight-cpp"><span class="o">&lt;</span><span class="n">your_directory</span><span class="o">&gt;</span></code> the cuPQC SDK header files, e.g. <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">cupqc</span><span class="p">.</span><span class="n">hpp</span></code> and <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">cuhash</span><span class="p">.</span><span class="n">hpp</span></code>,</dt><dd><p>will be located in:</p>
+</dd>
+</dl>
 <ul class="simple">
 <li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="o">&lt;</span><span class="n">your_directory</span><span class="o">&gt;/</span><span class="n">include</span><span class="o">/</span><span class="n">cupqc</span><span class="o">/</span></code></p></li>
 </ul>
-<p>Since cuPQC is a Device Extension library, we utilize <em>commondx</em>. The commondx shipped with this library from MathDx 24.08,
+<p>Since cuPQC is a Device Extension library, <em>commondx</em> is included. The commondx shipped with this library from MathDx 24.08
 and is located:</p>
 <ul class="simple">
 <li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="o">&lt;</span><span class="n">your_directory</span><span class="o">&gt;/</span><span class="n">include</span><span class="o">/</span><span class="n">commondx</span><span class="o">/</span></code></p></li>
 </ul>
-<p>You can review the <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">Makefile</span></code> shipped alongside the cuPQC examples to see how they are compiled.</p>
+<p>You can review the <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">Makefile</span></code> shipped alongside the cuPQC SDK examples to see how they are compiled.</p>
 </section>
 <section id="cupqc-in-your-cmake-project">
 <h2>cuPQC In Your CMake Project<a class="headerlink" href="#cupqc-in-your-cmake-project" title="Link to this heading">#</a></h2>
-<p>The cuPQC package provides configurations files that simplify using cuPQC in other CMake projects. The config files are located in</p>
+<p>The cuPQC SDK provides configuration files that simplify using cuPQC’s libraries in other CMake projects. The config files are located in</p>
 <ul class="simple">
 <li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="o">&lt;</span><span class="n">your_directory</span><span class="o">&gt;/</span><span class="n">cmake</span><span class="o">/</span></code></p></li>
 </ul>
+<p>For the cuPQC library:</p>
+<p>For cuHash:</p>
 </section>
 </section>
 
@@ -370,7 +374,7 @@ and is located:</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">cuPQC Usage</p>
+        <p class="prev-next-title">cuPQC SDK Usage</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -380,6 +384,8 @@ and is located:</p>
             </div>
             
             
+
+
               
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
@@ -393,7 +399,7 @@ and is located:</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cupqc-in-your-project">cuPQC In Your Project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-cupqc-sdk-in-your-project">Using the cuPQC SDK In Your Project</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cupqc-in-your-cmake-project">cuPQC In Your CMake Project</a></li>
 </ul>
   </nav></div>
@@ -401,6 +407,7 @@ and is located:</p>
 </div></div>
               
             
+
           </div>
           <footer class="bd-footer-content">
             
@@ -411,8 +418,8 @@ and is located:</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -476,9 +483,10 @@ and is located:</p>
 
 
 
+
   <p class="copyright">
     
-      Copyright © 2024-2024, NVIDIA Corporation &amp; Affiliates. All rights reserved.
+      Copyright © 2024-2025, NVIDIA Corporation &amp; Affiliates. All rights reserved.
       <br/>
     
   </p>

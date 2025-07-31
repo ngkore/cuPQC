@@ -17,8 +17,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -28,19 +28,19 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=4c56b82b" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=d0aa047a" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/cupqc_override.css" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=7f41d439"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Quick Installation Guide" href="installation.html" />
-    <link rel="prev" title="NVIDIA cuPQC Documentation" href="index.html" />
+    <link rel="prev" title="NVIDIA cuPQC SDK Documentation" href="index.html" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -242,6 +242,7 @@
         <div class="sidebar-primary-item">
 
 
+
 <nav class="bd-docs-nav bd-links"
      aria-label="Table of Contents">
   <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
@@ -252,7 +253,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Requirements and Functionality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Quick Installation Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">cuPQC Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">cuPQC SDK Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">Software License Agreement</a></li>
 </ul>
@@ -270,8 +271,6 @@
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
 
@@ -326,26 +325,27 @@
 <li><p>Supported CUDA compiler</p></li>
 <li><p>Supported host compiler (C++17 required)</p></li>
 <li><p>(Optionally) CMake (version 3.20 or greater)</p></li>
-<li><p>x86_64 CPU</p></li>
-<li><p>A NVIDIA GPU with one the following architectures: 70, 75, 80, 86, 89, 90</p></li>
+<li><p>x86_64 or Arm64 CPU</p></li>
+<li><p>A NVIDIA GPU with one of the following architectures: 70, 75, 80, 86, 87, 89, 90</p></li>
 </ul>
 <section id="supported-compilers">
 <h3>Supported Compilers<a class="headerlink" href="#supported-compilers" title="Link to this heading">#</a></h3>
 <p><strong>CUDA Compilers:</strong></p>
 <ul class="simple">
-<li><p>NVCC 12.4.90+ (CUDA Toolkit 12.4 or newer)</p></li>
+<li><p>NVCC 12.4+ (CUDA Toolkit 12.4 or newer)</p></li>
 </ul>
 <p><strong>Host C++ Compilers:</strong></p>
 <ul class="simple">
 <li><p>GCC 7+</p></li>
 <li><p>Clang 9+</p></li>
+<li><p>Aarch64-GCC 7+</p></li>
 </ul>
 </section>
 </section>
-<section id="functionality">
-<span id="functionality-label"></span><h2>Functionality<a class="headerlink" href="#functionality" title="Link to this heading">#</a></h2>
+<section id="cupqc-functionality">
+<span id="functionality-label"></span><h2>cuPQC Functionality<a class="headerlink" href="#cupqc-functionality" title="Link to this heading">#</a></h2>
 <p>The cuPQC library aims to meet the growing demand for robust cryptographic solutions capable of withstanding the computational capabilities of quantum computers. By utilizing NVIDIA GPUs, cuPQC achieves significant performance improvements, making it a valuable asset for applications requiring both speed and security. Additionally, the library is designed with side-channel security measures to protect against various forms of side-channel attacks.</p>
-<p>cuPQC is one of NVIDIA’s Device Extensions libraries and it enables you to perform calculations inside your CUDA kernel. This helps to decrease the latency and improve the performance of your application when used with other CUDA functions.</p>
+<p>cuPQC is a Device Extensions libraries and it enables you to perform calculations inside your CUDA kernel. This helps to decrease latency and improve performance of your application when used with other CUDA functions.</p>
 <p>Examples of kernels using the library are included in the package as cuPQC samples.</p>
 <section id="ml-kem-fips-203">
 <h3>ML-KEM (FIPS-203)<a class="headerlink" href="#ml-kem-fips-203" title="Link to this heading">#</a></h3>
@@ -385,8 +385,19 @@
 <li><p><strong>Security:</strong> Implements NIST-standardized algorithms, ensuring compliance with the latest cryptographic standards.</p></li>
 <li><p><strong>Side-Channel Security:</strong> Incorporates measures to protect against side-channel attacks, ensuring the robustness of cryptographic operations.</p></li>
 </ul>
-<p>See <a class="reference internal" href="api/methods.html#methods-label"><span class="std std-ref">Device Methods</span></a> for detailed descriptions of each descriptor’s execution and arguments.</p>
 </section>
+</section>
+<section id="cuhash-functionality">
+<h2>cuHash Functionality<a class="headerlink" href="#cuhash-functionality" title="Link to this heading">#</a></h2>
+<p>The cuHash library offers optimized implementations of the following hash functions:</p>
+<ul class="simple">
+<li><p><strong>SHA-2:</strong> Secure Hash Algorithm 2, including SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, and SHA-512/256.</p></li>
+<li><p><strong>SHA-3:</strong> Secure Hash Algorithm 3, including SHA3-224, SHA3-256, SHA3-384, and SHA3-512.</p></li>
+<li><p><strong>SHAKE:</strong> SHA-3 Derivatives, including SHAKE128 and SHAKE256.</p></li>
+</ul>
+<p>cuHash is also a device extensions library, allowing users to write single kernel implementations that include the above
+hashing algorithms.</p>
+<p>See <a class="reference internal" href="api/methods.html#methods-label"><span class="std std-ref">Device Methods</span></a> for detailed descriptions of each descriptor’s execution and arguments.</p>
 </section>
 </section>
 
@@ -406,7 +417,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">NVIDIA cuPQC Documentation</p>
+        <p class="prev-next-title">NVIDIA cuPQC SDK Documentation</p>
       </div>
     </a>
     <a class="right-next"
@@ -424,6 +435,8 @@
             </div>
             
             
+
+
               
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
@@ -441,18 +454,20 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-compilers">Supported Compilers</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functionality">Functionality</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cupqc-functionality">cuPQC Functionality</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ml-kem-fips-203">ML-KEM (FIPS-203)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ml-dsa-fips-204">ML-DSA (FIPS-204)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuhash-functionality">cuHash Functionality</a></li>
 </ul>
   </nav></div>
 
 </div></div>
               
             
+
           </div>
           <footer class="bd-footer-content">
             
@@ -463,8 +478,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -528,9 +543,10 @@
 
 
 
+
   <p class="copyright">
     
-      Copyright © 2024-2024, NVIDIA Corporation &amp; Affiliates. All rights reserved.
+      Copyright © 2024-2025, NVIDIA Corporation &amp; Affiliates. All rights reserved.
       <br/>
     
   </p>

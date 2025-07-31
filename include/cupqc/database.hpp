@@ -11,6 +11,8 @@
 
 #include "database/ml_kem.cuh"
 #include "database/ml_dsa.cuh"
+#include "database/sha3.cuh"
+#include "database/sha2.cuh"
 
 #endif // CUPQC_DATABASE_HPP
 

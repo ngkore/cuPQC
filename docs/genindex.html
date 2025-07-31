@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,19 +27,19 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=4c56b82b" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=d0aa047a" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/cupqc_override.css" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=7f41d439"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
@@ -181,8 +181,6 @@
       
       
       
-        
-      
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
@@ -237,6 +235,7 @@
         <div class="sidebar-primary-item">
 
 
+
 <nav class="bd-docs-nav bd-links"
      aria-label="Table of Contents">
   <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
@@ -247,7 +246,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements and Functionality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Quick Installation Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">cuPQC Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">cuPQC SDK Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">Software License Agreement</a></li>
 </ul>
@@ -265,8 +264,6 @@
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
 
@@ -296,13 +293,21 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/operators.html#_CPPv4N5cupqc9algorithmE">cupqc::algorithm (C++ enum)</a>
+      <li><a href="api/operators.html#_CPPv4N5cupqc9algorithmE">cupqc::algorithm (C++ enum)</a>, <a href="api/operators.html#_CPPv4N5cupqc9algorithmE">[1]</a>
 </li>
-      <li><a href="api/operators.html#_CPPv4I_9algorithmEN5cupqc9AlgorithmEv">cupqc::Algorithm (C++ function)</a>
+      <li><a href="api/operators.html#_CPPv4I_9algorithmEN5cupqc9AlgorithmEv">cupqc::Algorithm (C++ function)</a>, <a href="api/operators.html#_CPPv4I_9algorithmEN5cupqc9AlgorithmEv">[1]</a>
 </li>
       <li><a href="api/operators.html#_CPPv4N5cupqc9algorithm6ML_DSAE">cupqc::algorithm::ML_DSA (C++ enumerator)</a>
 </li>
       <li><a href="api/operators.html#_CPPv4N5cupqc9algorithm6ML_KEME">cupqc::algorithm::ML_KEM (C++ enumerator)</a>
+</li>
+      <li><a href="api/operators.html#_CPPv4N5cupqc9algorithm7SHA2_32E">cupqc::algorithm::SHA2_32 (C++ enumerator)</a>
+</li>
+      <li><a href="api/operators.html#_CPPv4N5cupqc9algorithm7SHA2_64E">cupqc::algorithm::SHA2_64 (C++ enumerator)</a>
+</li>
+      <li><a href="api/operators.html#_CPPv4N5cupqc9algorithm4SHA3E">cupqc::algorithm::SHA3 (C++ enumerator)</a>
+</li>
+      <li><a href="api/operators.html#_CPPv4N5cupqc9algorithm5SHAKEE">cupqc::algorithm::SHAKE (C++ enumerator)</a>
 </li>
       <li><a href="api/operators.html#_CPPv4N5cupqc5BlockEv">cupqc::Block (C++ function)</a>
 </li>
@@ -324,9 +329,19 @@
 </li>
       <li><a href="api/operators.html#_CPPv4N5cupqc8function6VerifyE">cupqc::function::Verify (C++ enumerator)</a>
 </li>
+      <li><a href="api/functions.html#_CPPv4I0EN5cupqc11get_entropyEP7uint8_t6size_t12cudaStream_t">cupqc::get_entropy (C++ function)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/functions.html#_CPPv4I0EN5cupqc11get_entropyEP7uint8_t6size_t12cudaStream_t">cupqc::get_entropy (C++ function)</a>
+      <li><a href="api/methods.html#_CPPv4N5cupqc4HASH6digestEP7uint8_tK6size_t">cupqc::HASH::digest (C++ function)</a>
+</li>
+      <li><a href="api/traits.html#_CPPv4N5cupqc4HASH11digest_sizeE">cupqc::HASH::digest_size (C++ member)</a>
+</li>
+      <li><a href="api/methods.html#_CPPv4N5cupqc4HASH8finalizeEv">cupqc::HASH::finalize (C++ function)</a>
+</li>
+      <li><a href="api/methods.html#_CPPv4N5cupqc4HASH5resetEv">cupqc::HASH::reset (C++ function)</a>
+</li>
+      <li><a href="api/methods.html#_CPPv4N5cupqc4HASH6updateEPK7uint8_tK6size_t">cupqc::HASH::update (C++ function)</a>
 </li>
       <li><a href="api/functions.html#_CPPv4I0EN5cupqc14make_workspaceEP7uint8_t6size_t12cudaStream_t">cupqc::make_workspace (C++ function)</a>
 </li>
@@ -352,7 +367,11 @@
 </li>
       <li><a href="api/functions.html#_CPPv4N5cupqc15release_entropyEP7uint8_t12cudaStream_t">cupqc::release_entropy (C++ function)</a>
 </li>
-      <li><a href="api/operators.html#_CPPv4I_jEN5cupqc16SecurityCategoryEv">cupqc::SecurityCategory (C++ function)</a>
+      <li><a href="api/operators.html#_CPPv4I_jEN5cupqc16SecurityCategoryEv">cupqc::SecurityCategory (C++ function)</a>, <a href="api/operators.html#_CPPv4I_jEN5cupqc16SecurityCategoryEv">[1]</a>
+</li>
+      <li><a href="api/operators.html#_CPPv4N5cupqc6ThreadEv">cupqc::Thread (C++ function)</a>
+</li>
+      <li><a href="api/operators.html#_CPPv4N5cupqc4WarpEv">cupqc::Warp (C++ function)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -374,8 +393,13 @@
             </div>
             
             
+
+<div class="bd-sidebar-secondary"></div>
+
+
               
             
+
           </div>
           <footer class="bd-footer-content">
             
@@ -386,8 +410,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -451,9 +475,10 @@
 
 
 
+
   <p class="copyright">
     
-      Copyright © 2024-2024, NVIDIA Corporation &amp; Affiliates. All rights reserved.
+      Copyright © 2024-2025, NVIDIA Corporation &amp; Affiliates. All rights reserved.
       <br/>
     
   </p>

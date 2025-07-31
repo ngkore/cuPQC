@@ -11,23 +11,31 @@
 
 #include <cstdint>
 #include <cstdio>
+#include <stdexcept>
+#include <string>
 #include <vector>
 
 namespace cupqc {
 
 template<class T>
 uint8_t* make_workspace(size_t batch, cudaStream_t stream = 0) {
+    cudaError_t error_code = cudaSuccess;
     if (T::workspace_size == 0) {
         return nullptr;
     } else {
         uint8_t* workspace;
-        cudaMallocAsync(&workspace, T::workspace_size * batch, stream);
+        error_code = cudaMallocAsync(&workspace, T::workspace_size * batch, stream);
+        if(error_code != cudaSuccess) {
+            std::string error_what = cudaGetErrorString(error_code);
+            throw std::runtime_error(error_what);
+        }
         return workspace;
     }
 }
 
 template<class T>
 uint8_t* get_entropy(size_t batch, cudaStream_t stream = 0) {
+    cudaError_t error_code = cudaSuccess;
     if (T::entropy_size == 0) {
         return nullptr;
     } else {
@@ -45,7 +53,11 @@ uint8_t* get_entropy(size_t batch, cudaStream_t stream = 0) {
         fclose(fp);
         // TODO do PRNG on device instead of in syscall to /dev/urandom
 
-        cudaMemcpyAsync(d_entropy, h_entropy.data(), bytes, cudaMemcpyDefault, stream);
+        error_code = cudaMemcpyAsync(d_entropy, h_entropy.data(), bytes, cudaMemcpyDefault, stream);
+        if(error_code != cudaSuccess) {
+            std::string error_what = cudaGetErrorString(error_code);
+            throw std::runtime_error(error_what);
+        }
 
         // Cannot return until h_entropy has been fully read
         cudaStreamSynchronize(stream);

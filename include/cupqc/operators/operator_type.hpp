@@ -20,9 +20,11 @@ namespace cupqc {
         sm,
         // execution
         block,
+        thread,
+        warp,
         // block only
         block_dim,
-        batches_per_block
+        batches_per_block,
     };
 } // namespace cupqc
 

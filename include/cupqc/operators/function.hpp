@@ -20,7 +20,9 @@ namespace cupqc {
         Decaps,
         // DSS
         Sign,
-        Verify
+        Verify,
+        // Hash
+        Hash,
     };
 
     template<function Value>
