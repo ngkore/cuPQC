@@ -8,6 +8,8 @@ To utilize cuPQC the user needs the following:
 
 * Supported CUDA compiler
 
+  cuPQC benchmarking video: https://youtu.be/mdnXKroR1wo?si=yiTMTUy1MIzl20_7
+
 These two steps will be done using the following commands:
 
 ```shell
@@ -83,46 +85,38 @@ make
 or either run the whole command manually
 
 ```shell
-nvcc -dlto -arch=native -std=c++17 -O3  -L../lib/ -lcupqc  -o <binary_name> <file_name.cu>  -I../include/ -I../include/cupqc
+nvcc -dlto -arch=native -std=c++17 -O3  -L../lib/ -lcupqc -lcuhash -o <binary_name> <file_name.cu>  -I../include/ -I../include/cupqc
 ```
 
 for eg:
 ```shell
-nvcc -dlto -arch=native -std=c++17 -O3  -L../lib/ -lcupqc  -o v2_bench_refactoring v2_bench_refactoring.cu  -I../include/ -I../include/cupqc
+nvcc -dlto -arch=native -std=c++17 -O3  -L../lib/ -lcupqc  -o v4_max_bench v4_max_bench.cu  -I../include/ -I../include/cupqc
 ```
 
 Make sure to adjust the `arch` as per your GPU's compute capability. Check it [here](https://developer.nvidia.com/cuda-gpus)
 
 > Note: if programs dont run then delete the binary and build again using any of the given above two commands
 
-### Benchmarking
+### Benchmarking (these tests were done on Nvidia GH200 and files are configured according to that)
 
-`v2_bench_refactoring.cu`
-
+For ML-KEM 512 Benchmarking:
 ```shell
-./v2_bench_refactoring
+nvcc -dlto -arch=native -std=c++17 -O3  -L../lib/ -lcupqc  -o v4_max_bench v4_max_bench.cu  -I../include/ -I../include/cupqc
+./v4_max_bench
 ```
+For ML-KEM 512 we achieved:
 
-The output should be like this:(Current benchmarking)
+* Keygen: ~20 million ops/sec
+* Encapsulation: ~18.5 million ops/sec
+* Decapsulation: ~18 million ops/sec
 
-```shell
-./v2_bench_refactoring 
-Key Generation Throughput: ~3126316.14 ops/sec
-Encapsulation Throughput: ~3268814.69 ops/sec
-Decapsulation Throughput: ~3134943.98 ops/sec
-Benchmarking completed successfully.
-```
 
-### Key generation
-`key_gen_verif_example_ml_kem.cu`
+For ML-KEM 768: `./mlkem768_bench`
 
-```shell
-./key_gen_verif_example_ml_kem
-```
+For ML-KEM 1024: `./mlkem1024_bench`
 
-### Shared secret validation
-`verify_ss_encap_decap.cu`
+For ML-DSA 44: `./bench_mldsa`
 
-```shell
-./verify_ss_encap_decap
-```
+For ML-DSA 65: `./mldsa65_bench`
+
+For ML-KEM 87: `./mldsa87_bench`
